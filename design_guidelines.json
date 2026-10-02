@@ -1,0 +1,218 @@
+{
+  "theme": "dark",
+  "app_type": "dashboard",
+  "currency": "INR",
+  "currency_symbol": "₹",
+  "fonts": {
+    "heading": "Outfit Variable",
+    "body": "IBM Plex Sans",
+    "mono": "IBM Plex Mono",
+    "css_import": "@import \"@fontsource-variable/outfit\";\n@import \"@fontsource/ibm-plex-sans\";\n@import \"@fontsource/ibm-plex-mono\";",
+    "css_vars": "--font-heading: 'Outfit Variable', sans-serif;\n--font-sans: 'IBM Plex Sans', sans-serif;\n--font-mono: 'IBM Plex Mono', monospace;"
+  },
+  "typography": {
+    "scale_px": {
+      "display": 48,
+      "h1": 36,
+      "h2": 28,
+      "h3": 20,
+      "h4": 16,
+      "body": 15,
+      "caption": 13
+    },
+    "rules": {
+      "headings": "font-heading font-semibold tracking-tight text-slate-100",
+      "labels": "font-sans uppercase text-xs tracking-wider text-slate-400 font-medium",
+      "numbers": "font-mono font-medium tracking-tight",
+      "body": "font-sans text-sm leading-relaxed text-slate-300",
+      "math_matrices": "font-mono text-xs leading-none bg-slate-950/80 p-3 rounded-lg border border-slate-800"
+    }
+  },
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#0B0F17",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "link": "#38BDF8",
+          "error": "#F87171",
+          "success": "#34D399",
+          "warning": "#FBBF24",
+          "forecast_accent": "#818CF8"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#111827",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "border": "#1F2937",
+          "border_highlight": "#374151"
+        }
+      },
+      {
+        "name": "card_subtle",
+        "kind": "solid",
+        "bg": "#151F32",
+        "on_bg": "#F1F5F9",
+        "on_bg_muted": "#94A3B8"
+      },
+      {
+        "name": "matrix_terminal",
+        "kind": "solid",
+        "bg": "#060A11",
+        "on_bg": "#38BDF8",
+        "on_bg_muted": "#64748B"
+      },
+      {
+        "name": "inverse",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#0B0F17",
+        "on_bg_muted": "#475569"
+      },
+      {
+        "name": "header_glass",
+        "kind": "glass",
+        "contrast_against": "#0B0F17",
+        "guarantee": "backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8"
+      }
+    ],
+    "accent": "#0284C7",
+    "on_accent": "#FFFFFF",
+    "categories": {
+      "Housing": "#38BDF8",
+      "Groceries": "#34D399",
+      "Transport": "#FBBF24",
+      "Utilities": "#A78BFA",
+      "Entertainment": "#F472B6",
+      "Health": "#FB7185",
+      "Shopping": "#FB923C",
+      "Other": "#94A3B8"
+    },
+    "math_indicators": {
+      "linear_regression": "#818CF8",
+      "matrix_vector": "#38BDF8",
+      "residual_variance": "#F43F5E",
+      "target_plan": "#0EA5E9",
+      "actual_history": "#10B981"
+    }
+  },
+  "entry_surfaces": {
+    "/": "command dashboard with sticky glass header, 4 KPI cards row, interactive month planner modal trigger, linear algebra forecast panel with matrix equation display, charts grid (category pie + planned vs actual bar + trend regression line), and monthly history ledger"
+  },
+  "layout_and_grids": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8",
+    "kpi_grid": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6",
+    "forecast_section": "grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch",
+    "forecast_main_card": "lg:col-span-7 bg-[#111827] border border-slate-800 rounded-xl p-6 relative overflow-hidden",
+    "forecast_matrix_card": "lg:col-span-5 bg-[#060A11] border border-slate-800/90 rounded-xl p-6 font-mono",
+    "charts_grid": "grid grid-cols-1 lg:grid-cols-12 gap-6",
+    "pie_chart_card": "lg:col-span-5 bg-[#111827] border border-slate-800 rounded-xl p-6",
+    "bar_chart_card": "lg:col-span-7 bg-[#111827] border border-slate-800 rounded-xl p-6",
+    "trend_chart_card": "col-span-full bg-[#111827] border border-slate-800 rounded-xl p-6",
+    "history_table_card": "col-span-full bg-[#111827] border border-slate-800 rounded-xl p-6 overflow-hidden"
+  },
+  "math_and_linear_algebra_engine": {
+    "concept": "Ordinary Least Squares (OLS) Matrix Regression: θ = (XᵀX)⁻¹ Xᵀ y",
+    "explanation": "Calculates slope and intercept from historical months to project next month expected spend and calculate dynamic surplus/deficit budget adjustments.",
+    "adjustment_rule": "If Last Month Actual Spend > Target Planned Spend, Next Month Spend Limit is throttled downward by the deficit delta (or least-squares projected delta), increasing required savings. If Last Month Actual Spend < Target Planned Spend, surplus money is unlocked with recommendations for extra savings vs discretionary spending.",
+    "matrix_visualization": "Display active matrix dimensions [N × 2] design matrix X, target vector y [N × 1], normal equations (XᵀX) and resulting coefficients [slope m, intercept c] in an interactive Matrix Math Inspector Drawer/Card."
+  },
+  "components_and_routes": {
+    "route": "/",
+    "components": [
+      {
+        "name": "AppHeader",
+        "path": "frontend/src/components/AppHeader.tsx",
+        "description": "Sticky top bar with brand badge 'SmartBudget Matrix', active currency INR (₹), 'New Monthly Plan' primary CTA button, 'Inspect Math' toggle modal, and quick stats."
+      },
+      {
+        "name": "KpiSummaryCards",
+        "path": "frontend/src/components/KpiSummaryCards.tsx",
+        "description": "4 high-contrast cards: 1. Total Cumulative Savings, 2. Current Month Target vs Actual, 3. Net Savings Rate %, 4. Next Month Recommended Spend Ceiling (Linear Algebra forecast)."
+      },
+      {
+        "name": "LinearAlgebraForecastPanel",
+        "path": "frontend/src/components/LinearAlgebraForecastPanel.tsx",
+        "description": "Interactive section highlighting the AI/Math forecast: shows the dynamic adjustment rule, projected spend & savings for month N+1, surplus/deficit badge, and a real-time (XᵀX)⁻¹Xᵀy matrix equation breakdown box."
+      },
+      {
+        "name": "SpendDistributionPieChart",
+        "path": "frontend/src/components/SpendDistributionPieChart.tsx",
+        "description": "Recharts PieChart / Donut chart showing breakdown across 8 fixed categories: Housing, Groceries, Transport, Utilities, Entertainment, Health, Shopping, Other with formatted ₹ INR tooltips."
+      },
+      {
+        "name": "PlannedVsActualBarChart",
+        "path": "frontend/src/components/PlannedVsActualBarChart.tsx",
+        "description": "Recharts grouped/stacked BarChart comparing Planned Spend, Actual Spend, Planned Savings, Actual Savings across historical months."
+      },
+      {
+        "name": "LinearRegressionTrendChart",
+        "path": "frontend/src/components/LinearRegressionTrendChart.tsx",
+        "description": "Recharts ComposedChart with actual spend dots, historical line, and dotted Linear Algebra least-squares forecast projection line into Month N+1."
+      },
+      {
+        "name": "MonthlyHistoryLedger",
+        "path": "frontend/src/components/MonthlyHistoryLedger.tsx",
+        "description": "Data table showing Month, Planned Income, Planned Spend, Planned Save, Actual Spend, Actual Save, Status (Planned / Actuals Logged / Overspent / Under Budget), and Action buttons: 'Enter Actuals', 'Edit Plan', 'Delete Month'."
+      },
+      {
+        "name": "PlanMonthDialog",
+        "path": "frontend/src/components/PlanMonthDialog.tsx",
+        "description": "Shadcn Dialog form to initialize a new month with Month selector (e.g. 2026-08), Planned Total Income, Planned Target Spend, Planned Target Save."
+      },
+      {
+        "name": "EnterActualsDialog",
+        "path": "frontend/src/components/EnterActualsDialog.tsx",
+        "description": "Shadcn Dialog form at end-of-month to log actual breakdown across 8 categories (Housing, Groceries, Transport, Utilities, Entertainment, Health, Shopping, Other), auto-summing to Total Actual Spend and calculating Resulting Actual Savings."
+      },
+      {
+        "name": "MatrixMathInspectorDialog",
+        "path": "frontend/src/components/MatrixMathInspectorDialog.tsx",
+        "description": "Modal explaining the mathematical linear algebra engine behind the forecast with live matrix rendering X, Xᵀ, (XᵀX)⁻¹, Xᵀy, θ = [m, c] and R² confidence score."
+      },
+      {
+        "name": "EmptyStateEmptyApp",
+        "path": "frontend/src/components/EmptyStateEmptyApp.tsx",
+        "description": "Polished empty state since app starts empty (no initial seed data), inviting user to 'Create Your First Monthly Budget Plan' with clear visual guide of how the linear algebra model activates once data is entered."
+      }
+    ]
+  },
+  "testing_attributes": {
+    "header_brand": "brand-logo",
+    "btn_new_plan": "btn-new-plan",
+    "btn_inspect_math": "btn-inspect-math",
+    "kpi_total_savings": "kpi-total-savings",
+    "kpi_current_spend": "kpi-current-spend",
+    "kpi_savings_rate": "kpi-savings-rate",
+    "kpi_forecast_next": "kpi-forecast-next",
+    "forecast_badge_status": "forecast-badge-status",
+    "forecast_next_spend": "forecast-next-spend",
+    "forecast_next_save": "forecast-next-save",
+    "matrix_equation_box": "matrix-equation-box",
+    "chart_category_pie": "chart-category-pie",
+    "chart_planned_actual_bar": "chart-planned-actual-bar",
+    "chart_regression_trend": "chart-regression-trend",
+    "table_monthly_history": "table-monthly-history",
+    "btn_enter_actuals_prefix": "btn-enter-actuals-",
+    "btn_edit_month_prefix": "btn-edit-month-",
+    "btn_delete_month_prefix": "btn-delete-month-",
+    "form_plan_month_submit": "form-plan-month-submit",
+    "form_actuals_submit": "form-actuals-submit"
+  },
+  "instructions_to_main_agent": [
+    "App starts EMPTY per user request (no pre-seeded fake entries). Provide an engaging empty state with quick 'Create 1st Month Plan' button and an optional 'Load Sample 3-Month Demo' button so user can test the matrix math immediately if desired.",
+    "Implement real Linear Algebra least-squares line fitting in both backend (via numpy.linalg.lstsq / custom matrix math) and frontend mirror (matrix computation helper) to compute next-month forecast.",
+    "Fixed spending categories are: Housing, Groceries, Transport, Utilities, Entertainment, Health, Shopping, Other. Currency must strictly be INR (₹).",
+    "Include high-contrast visuals, smooth hover transitions, responsive drawer/dialog modals with Shadcn UI and Base UI compliance.",
+    "Attach all defined data-testid attributes to buttons, dialog triggers, inputs, KPI cards, and chart containers."
+  ]
+}
