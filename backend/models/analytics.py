@@ -77,12 +77,21 @@ class CategorySlice(BaseModel):
     amount: float
 
 
+class MonthCategories(BaseModel):
+    """Category breakdown of one closed month — feeds the pie chart's per-month view."""
+
+    month: str
+    total: float
+    slices: list[CategorySlice] = []
+
+
 class Stats(BaseModel):
     """Aggregates that feed the KPI cards and charts."""
 
     months: list[MonthSeriesPoint] = []
     categories_total: list[CategorySlice] = []
     categories_last: list[CategorySlice] | None = None
+    categories_by_month: list[MonthCategories] = []  # chronological, closed months only
     last_closed_month: str | None = None
     total_saved: float = 0.0
     total_closed_income: float = 0.0

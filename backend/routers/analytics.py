@@ -16,6 +16,7 @@ from models.analytics import (
     CategorySlice,
     Forecast,
     MatrixBreakdown,
+    MonthCategories,
     MonthSeriesPoint,
     SeriesFit,
     Stats,
@@ -215,6 +216,16 @@ async def get_stats():
             if k in CATEGORIES:
                 cat_total[k] = cat_total.get(k, 0.0) + float(v)
 
+    # Per-month breakdowns (chronological) — the pie chart's "pick a previous month" view.
+    categories_by_month = [
+        MonthCategories(
+            month=c["month"],
+            total=_r2(sum(float(v) for v in (c.get("categories") or {}).values())),
+            slices=_slices(c),
+        )
+        for c in closed
+    ]
+
     total_saved = sum(float(c["actual_save"] or 0.0) for c in closed)
     total_income = sum(float(c["income"]) for c in closed)
     spends = [float(c["actual_spend"]) for c in closed]
@@ -223,6 +234,7 @@ async def get_stats():
         months=months,
         categories_total=[CategorySlice(category=k, amount=_r2(v)) for k, v in sorted(cat_total.items(), key=lambda kv: -kv[1])],
         categories_last=_slices(closed[-1]) if closed else None,
+        categories_by_month=categories_by_month,
         last_closed_month=closed[-1]["month"] if closed else None,
         total_saved=_r2(total_saved),
         total_closed_income=_r2(total_income),

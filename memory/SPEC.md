@@ -34,9 +34,20 @@ frontend/src/lib/categories.ts).
 
 ## Frontend
 Single dashboard page `/` (src/pages/Home.tsx): sticky glass header, 4 KPI cards,
-forecast panel + matrix engine card, donut (category split, last closed month), grouped
-bar (planned vs actual spend/save), regression trend chart with projected point, monthly
-history ledger with enter-actuals/edit/delete. TanStack Query everywhere; types mirrored
+forecast panel + matrix engine card, donut (category split), grouped bar (planned vs
+actual spend/save), regression trend chart with projected point, monthly history ledger
+with enter-actuals/edit/delete.
+
+### Chart view options (history browsing)
+- **Donut**: month `Select` (`select-pie-month`) — "All months combined" (uses
+  `stats.categories_total`) or any individual closed month (`stats.categories_by_month`).
+  Defaults to the newest closed month; center label shows the selected total.
+- **Bar + trend charts**: shared `ChartRangeTabs` (`components/ChartRangeTabs.tsx`) with
+  All / Last 3 / Last 6 / Last 12 — options only render when enough months exist
+  (`applyRange()` keeps the trailing slice). Trend chart always keeps the projected
+  point visible regardless of range.
+- **Toggles**: bar chart "Show savings bars" (`toggle-bar-savings`, on by default);
+  trend chart "Overlay actual savings" (`toggle-trend-savings`, off by default). TanStack Query everywhere; types mirrored
 by hand in src/types.ts. Dark navy theme (Outfit headings, IBM Plex Sans/Mono), ₹ en-IN
 formatting. No auth — single user, no login.
 

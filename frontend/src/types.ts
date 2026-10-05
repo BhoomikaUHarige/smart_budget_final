@@ -97,10 +97,17 @@ export interface CategorySlice {
   amount: number;
 }
 
+export interface MonthCategories {
+  month: string;
+  total: number;
+  slices: CategorySlice[];
+}
+
 export interface Stats {
   months: MonthSeriesPoint[];
   categories_total: CategorySlice[];
   categories_last: CategorySlice[] | null;
+  categories_by_month: MonthCategories[];
   last_closed_month: string | null;
   total_saved: number;
   total_closed_income: number;

@@ -95,7 +95,7 @@ export default function Home() {
                 <PlannedVsActualBarChart stats={statsQ.data} />
               </div>
               <div className="lg:col-span-12">
-                <LinearRegressionTrendChart forecast={forecastQ.data} />
+                <LinearRegressionTrendChart forecast={forecastQ.data} stats={statsQ.data} />
               </div>
               <div className="lg:col-span-12">
                 <MonthlyHistoryLedger months={months} onEnterActuals={setActualsMonth} onEditPlan={openEditPlan} />
