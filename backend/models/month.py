@@ -50,6 +50,12 @@ class MonthCreate(BaseModel):
     planned_save: float = Field(ge=0)
 
 
+class ResetResult(BaseModel):
+    """Result of wiping every saved month ("start fresh" on the launch screen)."""
+
+    deleted: int
+
+
 class MonthUpdate(BaseModel):
     """PATCH body — every field optional; when `categories` is sent it recomputes actual_spend."""
 

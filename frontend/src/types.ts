@@ -32,6 +32,10 @@ export interface MonthUpdate {
   categories?: Record<string, number>;
 }
 
+export interface ResetResult {
+  deleted: number;
+}
+
 export interface SeriesFit {
   slope: number;
   intercept: number;

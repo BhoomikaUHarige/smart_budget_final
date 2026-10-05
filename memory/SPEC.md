@@ -27,10 +27,21 @@ frontend/src/lib/categories.ts).
 
 ## API (all under /api, routers mounted in server.py)
 - GET/POST /api/months, PATCH/DELETE /api/months/{id} (PATCH with categories recomputes
-  actual_spend and sets closed), POST /api/months/demo (3 sample months, skips existing)
+  actual_spend and sets closed), DELETE /api/months (reset all → `{deleted: n}`, powers
+  "start freshly"), POST /api/months/demo (3 sample months, skips existing)
 - GET /api/forecast, GET /api/stats (chart aggregates: per-month series, category slices,
   totals, savings rate)
 - Template endpoints remain: GET /api/, POST/GET /api/status
+
+## Launch screen (shown on every app open)
+`components/StartChoiceScreen.tsx`, gated in `pages/Home.tsx` via `launchChoice` state:
+- Appears on every page load **when saved months exist**; skipped entirely when the DB is
+  empty (nothing to continue → straight to the empty-state dashboard).
+- **Option 1 "Continue previous plans"** (`btn-continue-plans`) — keeps everything, shows a
+  preview card: months saved, closed months, latest month, total saved.
+- **Option 2 "Start freshly"** (`btn-start-fresh`) — opens a confirm dialog
+  (`btn-confirm-reset` / `btn-cancel-reset`); confirming calls `DELETE /api/months`
+  (wipes all months, returns `{deleted: n}`, idempotent) then lands on the empty state.
 
 ## Frontend
 Single dashboard page `/` (src/pages/Home.tsx): sticky glass header, 4 KPI cards,

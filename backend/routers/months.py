@@ -9,7 +9,7 @@ from pymongo import ASCENDING
 from lib.dates import today_iso
 from lib.db import db
 from lib.forecast import shift_month
-from models.month import CATEGORIES, Month, MonthCreate, MonthUpdate, utcnow
+from models.month import CATEGORIES, Month, MonthCreate, MonthUpdate, ResetResult, utcnow
 
 router = APIRouter(prefix="/months", tags=["months"])
 
@@ -57,6 +57,13 @@ async def create_month(input: MonthCreate):
     month = Month(**input.model_dump())
     await db.months.insert_one(month.model_dump())
     return month
+
+
+@router.delete("", response_model=ResetResult)
+async def reset_months():
+    """Wipe every saved month — backs "start fresh" on the launch screen."""
+    result = await db.months.delete_many({})
+    return ResetResult(deleted=result.deleted_count)
 
 
 @router.patch("/{month_id}", response_model=Month)
