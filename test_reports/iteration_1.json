@@ -1,0 +1,64 @@
+{
+  "iteration": 1,
+  "mode": "generate",
+  "summary": "6 browser checks + 1 backend test covering all 6 acceptance criteria. All passed.",
+  "passed": 7,
+  "failed": 0,
+  "checks": [
+    {
+      "criterion": "Savings auto-calculates from income minus total category spend in the 'Log actuals' dialog",
+      "name": "actuals-auto-save-calculates",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Opened actuals dialog for 2026-09, set income=50000, Housing=15000, Groceries=5000, other categories=0. savings-auto-badge visible, savings-formula-note read 'income ₹50,000 − spend ₹20,000 = ₹30,000', input-actual-save value = '30000'."
+    },
+    {
+      "criterion": "Auto savings recomputes live when any category or income value changes",
+      "name": "actuals-auto-save-live-recompute",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "After setting Transport=5000, input-actual-save updated to '25000' and actual-total-spend showed '₹25,000'. After changing income to 60000, input-actual-save updated to '35000' while actual-total-spend remained '₹25,000'."
+    },
+    {
+      "criterion": "User can manually override auto savings and restore auto mode",
+      "name": "actuals-manual-override-restore",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Typing '1000' into input-actual-save removed savings-auto-badge and showed btn-savings-recalculate; savings-formula-note read 'Manual value. Auto would be ₹30,000 · ₹29,000 unaccounted'. Clicking btn-savings-recalculate restored savings-auto-badge and input-actual-save value '30000'."
+    },
+    {
+      "criterion": "Submitting the actuals dialog persists the auto-calculated savings",
+      "name": "actuals-submit-persists-savings",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Created fixture month 2033-MM via POST /api/months, filled actuals (income 50000, spend 20000, auto save 30000), submitted via form-actuals-submit; dialog closed, monthly-history row showed '₹20,000' / '₹30,000'; reopening the dialog re-showed actual-save=30000 and Housing=15000."
+    },
+    {
+      "criterion": "Submitting the actuals dialog persists the auto-calculated savings (API)",
+      "name": "test_patch_actuals_persists_auto_calculated_savings",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "PATCH /api/months/{id} with categories totalling 20000 and actual_save=35000 (income 60000) returned 200 with matching actual_spend/actual_save; re-fetch via GET /api/months confirmed persistence on the created fixture month (not the seeded 2026-07/08/09 rows)."
+    },
+    {
+      "criterion": "No 'OLS' wording anywhere in the UI — the engine is weighted least squares (WLS)",
+      "name": "no-ols-wording-wls-only",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "page.locator('body').innerText() on dashboard and inside the matrix inspector dialog (btn-inspect-math) contained no literal 'OLS'; text included 'WLS fit' and 'raw WLS spend projection' as required."
+    },
+    {
+      "criterion": "Dashboard core flow still works after these changes",
+      "name": "dashboard-core-flow",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Ran against public preview URL. After btn-continue-plans, page-dashboard, forecast-next-spend, forecast-next-save visible; all three charts (chart-category-pie, chart-planned-actual-bar, chart-regression-trend) rendered a recharts application svg; no console errors; no HTTP response >= 400."
+    }
+  ],
+  "bugs": [],
+  "action_items": [],
+  "notes": [
+    "The actuals-submit-persists-savings check initially targeted the seeded 2026-08 row to exercise the submit flow; after discovering this mutated seed data, the check was rewritten to create its own fixture month via the API (seed data was restored to original DEMO_MONTHS values via PATCH and verified afterward)."
+  ],
+  "retest_needed": false
+}

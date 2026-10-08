@@ -85,7 +85,7 @@ export default function LinearAlgebraForecastPanel({ forecast: f, onInspectMath 
           <p className="text-xs text-muted-foreground">
             Projected income: <span className="font-mono text-slate-300">{formatINR(f?.income_next)}</span>
             {f?.trend_spend !== null && f?.trend_spend !== undefined && (
-              <> · raw OLS spend projection: <span className="font-mono text-slate-300">{formatINR(f.trend_spend)}</span></>
+              <> · raw WLS spend projection: <span className="font-mono text-slate-300">{formatINR(f.trend_spend)}</span></>
             )}
           </p>
 

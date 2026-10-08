@@ -42,7 +42,7 @@ export default function LinearRegressionTrendChart({ forecast: f, stats }: Trend
         <CardTitle className="font-heading">Spend trend &amp; least-squares projection</CardTitle>
         <CardDescription>
           {series.length > 0
-            ? "Solid = actual spend · dashed = OLS fit c + m·t, projected into next month"
+            ? "Solid = actual spend · dashed = WLS fit c + m·t, projected into next month"
             : "The regression line activates after your first closed month"}
         </CardDescription>
         {history.length > 0 && (
@@ -65,7 +65,7 @@ export default function LinearRegressionTrendChart({ forecast: f, stats }: Trend
       <CardContent>
         {data.length === 0 ? (
           <div className="flex h-72 items-center justify-center rounded-lg border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-            Log one month of actuals and θ = (XᵀWX)⁻¹XᵀWy draws your trend line here.
+            Log one month of actuals and the weighted least-squares fit θ = (XᵀWX)⁻¹XᵀWy draws your trend line here.
           </div>
         ) : (
           <div className="h-72">
@@ -90,7 +90,7 @@ export default function LinearRegressionTrendChart({ forecast: f, stats }: Trend
                 <Line
                   type="monotone"
                   dataKey="fitted"
-                  name="OLS fit + projection"
+                  name="WLS fit + projection"
                   stroke="#818CF8"
                   strokeWidth={2}
                   strokeDasharray="6 4"
